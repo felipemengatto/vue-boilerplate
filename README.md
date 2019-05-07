@@ -2,7 +2,7 @@
 Simple vue-boilerplate to start a project with vue and vuex
 
 #### To test download the API
-To test download and run the project: `https://github.com/felipemengatto/omdb-server`
+To test download and run the project: `[https://github.com/felipemengatto/omdb-server](https://github.com/felipemengatto/omdb-server)`
 
 #### Install Dependencies
 `npm i`
