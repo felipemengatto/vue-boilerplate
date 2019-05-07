@@ -1,6 +1,10 @@
 import { createLocalVue, mount } from '@vue/test-utils';
 import Vuex from 'vuex';
 
+jest.mock('@modules', () => ({
+    EXAMPLE: 'example'
+}))
+
 import { SearchBar } from '@containers';
 
 const localVue = createLocalVue();
@@ -8,7 +12,7 @@ const localVue = createLocalVue();
 localVue.use(Vuex);
 
 describe('SearchBar Spec', () => {
-    let actions, mutations, store, wrapper;
+    let actions, store, wrapper;
 
     const searchKey = 'Star';
 
@@ -18,19 +22,22 @@ describe('SearchBar Spec', () => {
             setSearchValue: jest.fn(),
         }
 
-        mutations = {
-            SET_SEARCH_VALUE(state, value) {
-                state.searchValue = value;
+        const modules = {
+            example: {
+                namespaced: true,
+                actions,
+                mutations: {
+                    SET_SEARCH_VALUE(state, value) {
+                        state.searchValue = value;
+                    }
+                },
+                state: {
+                    searchValue: '',
+                }
             }
         }
 
-        store = new Vuex.Store({
-            actions,
-            mutations,
-            state: {
-                searchValue: '',
-            }
-        });
+        store = new Vuex.Store({ modules });
 
         wrapper = mount(SearchBar, {
             store,
@@ -39,12 +46,12 @@ describe('SearchBar Spec', () => {
     });
 
     it('has searchValue', () => {
-        store.commit('SET_SEARCH_VALUE', searchKey);
+        store.commit('example/SET_SEARCH_VALUE', searchKey);
         expect(wrapper.vm.searchValue).toEqual(searchKey);
     });
 
     it('calls the right action search', () => {
-        store.commit('SET_SEARCH_VALUE', searchKey);
+        store.commit('example/SET_SEARCH_VALUE', searchKey);
         wrapper.find('button').trigger('click');
         expect(actions.setSearchValue).toHaveBeenCalled();
     })
