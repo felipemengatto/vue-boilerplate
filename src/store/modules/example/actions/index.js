@@ -1,4 +1,4 @@
-import exampleActions from './example.actions';
+import exampleActions from './exampleActions';
 
 export default {
     ...exampleActions,

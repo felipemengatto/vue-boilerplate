@@ -1,4 +1,4 @@
-import exampleMutations from './example.mutations';
+import exampleMutations from './exampleMutations';
 
 export default {
     ...exampleMutations,

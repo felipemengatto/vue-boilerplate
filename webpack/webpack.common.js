@@ -4,13 +4,13 @@ const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const baseWebpackConfig = require('./webpack.base.config.js');
 
-const APLICATION_NAME = 'example';
+const APLICATION_NAME = 'ExampleApp';
 const pathFolderApplication = path.resolve(__dirname, '../src');
 const pathNodeModules = path.resolve(__dirname, '../node_modules');
 const pathDistProduction = path.resolve(__dirname, '../dist');
 
 module.exports = merge(baseWebpackConfig, {
-    entry: path.resolve('ModuleApp.js'),
+    entry: path.resolve('index.js'),
     output: {
         path: pathDistProduction,
         filename: `${APLICATION_NAME}.min.js`
@@ -34,13 +34,13 @@ module.exports = merge(baseWebpackConfig, {
             pathNodeModules
         ],
         alias: {
-            '@': path.resolve(pathFolderApplication),
+            '@': path.resolve(__dirname, '../'),
             '@components': path.resolve(pathFolderApplication, 'components'),
             '@containers': path.resolve(pathFolderApplication, 'containers'),
+            '@modules': path.resolve(pathFolderApplication, 'store/modules'),
             '@pages': path.resolve(pathFolderApplication, 'pages'),
             '@services': path.resolve(pathFolderApplication, 'services'),
-            '@store': path.resolve(pathFolderApplication, 'store'),
-            '@storeModules': path.resolve(pathFolderApplication, 'store/modules'),
+            '@store': path.resolve(pathFolderApplication, 'store')
         }
     }
 });

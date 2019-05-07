@@ -7,7 +7,7 @@ module.exports = merge(common, {
     devtool: 'inline-source-map',
     plugins: [
         new webpack.DefinePlugin({
-            'BASE_URL': JSON.stringify('/app_dev.php'),
+            'BASE_URL': JSON.stringify(''),
         }),
     ],
 });

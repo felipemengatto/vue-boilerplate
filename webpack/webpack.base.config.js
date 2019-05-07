@@ -29,19 +29,24 @@ module.exports = {
 			{
 			    test: /\.(scss|css)$/,
 			    use: [
-			        MiniCssExtractPlugin.loader,
-			        {
-			            loader: 'css-loader',
-			            options: {
-			                minimize: {
-			                    safe: true
-			                }
-			            }
-			        },
-			        {
-			            loader: 'sass-loader',
-			            options: {}
-			        }
+					{
+						loader: MiniCssExtractPlugin.loader,
+						options: {
+							sourceMap: true
+						}
+					},
+					{
+						loader: 'css-loader',
+						options: {
+							sourceMap: true
+						}
+					},
+					{
+						loader: 'sass-loader',
+						options: {
+							sourceMap: true
+						}
+					}
 			    ]
 			},
 			{
@@ -53,13 +58,17 @@ module.exports = {
 				}
 			},
 			{
-				test: /\.js$/,
-				loader: 'babel-loader',
+				test: /\.m?js$/,
 				exclude: /node_modules/,
-	            options: {
-	                presets: ['es2017', 'stage-3', 'env'],
-	                plugins: ['transform-runtime']
-	            },
+				use: {
+					loader: 'babel-loader',
+					options: {
+						presets: ['@babel/preset-env'],
+						plugins: [
+							'@babel/plugin-transform-runtime'
+						]
+					}
+				}
 			},
 			{
 				test: /\.(png|jpg|gif|svg)$/,

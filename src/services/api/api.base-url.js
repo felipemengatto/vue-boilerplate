@@ -1,1 +1,0 @@
-export const BASE_URL_APP = BASE_URL;
